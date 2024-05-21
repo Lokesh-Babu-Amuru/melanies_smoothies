@@ -9,7 +9,8 @@ st.write(
     """
 )
 
-session = get_active_session()
+cnx = st.connection("snowflake")
+session = cnx.session()
 my_dataframe = session.table("smoothies.public.orders").filter(col("ORDER_FILLED")=='false').collect()
 if my_dataframe:
     editable_df = st.data_editor(my_dataframe)
